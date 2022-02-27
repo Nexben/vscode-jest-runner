@@ -1,6 +1,7 @@
 MIT License
 
-Copyright (c) 2017 Tristan Teufel
+Portions Copyright (c) 2017 Tristan Teufel as part of <https://github.com/firsttris/vscode-jest-runner>
+All other portions in this repo are Copyright (c) 2022 Nexben
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

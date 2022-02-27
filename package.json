@@ -1,27 +1,72 @@
 {
   "name": "vscode-jest-runner",
   "displayName": "Jest Runner",
-  "description": "Simple way to run or debug a single (or multiple) tests from context-menu",
   "version": "0.4.47",
-  "publisher": "firsttris",
-  "author": "Tristan Teufel",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/firsttris/vscode-jest-runner.git"
-  },
-  "license": "MIT",
-  "icon": "public/icon.png",
-  "engines": {
-    "vscode": "^1.60.0"
-  },
+  "description": "Simple way to run or debug a single (or multiple) tests from context-menu",
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "*"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nexben/vscode-jest-runner.git"
+  },
+  "license": "MIT",
+  "author": "Nexben",
+  "publisher": "nexben",
   "main": "./dist/extension",
+  "scripts": {
+    "compile": "webpack --mode development",
+    "eslint:fix": "eslint --cache --fix",
+    "prettier": "prettier --write",
+    "publish": "vsce publish patch && git push",
+    "test": "node ./out/test/runTest.js",
+    "test-compile": "tsc -p ./",
+    "vscode:prepublish": "webpack --mode production",
+    "watch": "webpack --mode development --watch"
+  },
   "contributes": {
+    "commands": [
+      {
+        "command": "extension.runJest",
+        "title": "Run Jest"
+      },
+      {
+        "command": "extension.runJestPath",
+        "title": "Run Jest"
+      },
+      {
+        "command": "extension.runJestAndUpdateSnapshots",
+        "title": "Run Jest and Update Snapshots"
+      },
+      {
+        "command": "extension.runPrevJest",
+        "title": "Run Previous Jest"
+      },
+      {
+        "command": "extension.runJestFile",
+        "title": "Run Jest File"
+      },
+      {
+        "command": "extension.debugJest",
+        "title": "Debug Jest"
+      },
+      {
+        "command": "extension.debugJestPath",
+        "title": "Debug Jest"
+      },
+      {
+        "command": "extension.runJestFileWithCoverage",
+        "title": "Run Jest File with Coverage"
+      },
+      {
+        "command": "extension.runJestFileWithWatchMode",
+        "title": "Run Jest File in Watch Mode"
+      },
+      {
+        "command": "extension.watchJest",
+        "title": "Watch Jest"
+      }
+    ],
     "configuration": [
       {
         "title": "Jest-Runner Config",
@@ -117,48 +162,6 @@
         }
       }
     ],
-    "commands": [
-      {
-        "command": "extension.runJest",
-        "title": "Run Jest"
-      },
-      {
-        "command": "extension.runJestPath",
-        "title": "Run Jest"
-      },
-      {
-        "command": "extension.runJestAndUpdateSnapshots",
-        "title": "Run Jest and Update Snapshots"
-      },
-      {
-        "command": "extension.runPrevJest",
-        "title": "Run Previous Jest"
-      },
-      {
-        "command": "extension.runJestFile",
-        "title": "Run Jest File"
-      },
-      {
-        "command": "extension.debugJest",
-        "title": "Debug Jest"
-      },
-      {
-        "command": "extension.debugJestPath",
-        "title": "Debug Jest"
-      },
-      {
-        "command": "extension.runJestFileWithCoverage",
-        "title": "Run Jest File with Coverage"
-      },
-      {
-        "command": "extension.runJestFileWithWatchMode",
-        "title": "Run Jest File in Watch Mode"
-      },
-      {
-        "command": "extension.watchJest",
-        "title": "Watch Jest"
-      }
-    ],
     "menus": {
       "editor/context": [
         {
@@ -188,37 +191,36 @@
       ]
     }
   },
-  "scripts": {
-    "vscode:prepublish": "webpack --mode production",
-    "compile": "webpack --mode development",
-    "watch": "webpack --mode development --watch",
-    "test": "node ./out/test/runTest.js",
-    "test-compile": "tsc -p ./",
-    "publish": "vsce publish patch && git push",
-    "eslint:fix": "eslint --cache --fix",
-    "prettier": "prettier --write"
+  "activationEvents": [
+    "*"
+  ],
+  "dependencies": {
+    "jest-editor-support": "^30.0.2"
   },
   "devDependencies": {
-    "@jest/types": "^27.1.1",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.9.0",
-    "@types/vscode": "^1.60.0",
-    "@typescript-eslint/eslint-plugin": "^4.31.0",
-    "@typescript-eslint/parser": "^4.31.0",
+    "@jest/types": "^27.5.1",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^16.11.26",
+    "@types/vscode": "^1.64.0",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
     "babylon": "^6.18.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint": "^8.10.0",
+    "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "jest": "^27.1.1",
-    "prettier": "^2.3.2",
-    "ts-jest": "^27.0.5",
-    "ts-loader": "^9.2.5",
-    "typescript": "^4.4.2",
-    "vscode-test": "^1.6.1",
-    "webpack": "^5.52.0",
-    "webpack-cli": "^4.8.0"
+    "jest": "^27.5.1",
+    "node-loader": "2.0.0",
+    "null-loader": "4.0.1",
+    "prettier": "^2.5.1",
+    "ts-jest": "^27.1.3",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "@vscode/test-electron": "^2.1.2",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.9.2"
   },
-  "dependencies": {
-    "jest-editor-support": "^29.0.0"
-  }
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "icon": "public/icon.png"
 }
